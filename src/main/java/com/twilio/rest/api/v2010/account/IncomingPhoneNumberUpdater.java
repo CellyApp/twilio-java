@@ -474,5 +474,9 @@ public class IncomingPhoneNumberUpdater extends Updater<IncomingPhoneNumber> {
         if (trunkSid != null) {
             request.addPostParam("TrunkSid", trunkSid);
         }
+
+        if (accountSid != null) {
+            request.addPostParam("AccountSid", accountSid);
+        }
     }
 }
