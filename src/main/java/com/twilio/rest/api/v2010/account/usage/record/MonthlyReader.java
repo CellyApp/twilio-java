@@ -26,6 +26,7 @@ public class MonthlyReader extends Reader<Monthly> {
     private Monthly.Category category;
     private LocalDate startDate;
     private LocalDate endDate;
+    private boolean includeSubaccounts = true;
 
     /**
      * Construct a new MonthlyReader.
@@ -72,6 +73,17 @@ public class MonthlyReader extends Reader<Monthly> {
      */
     public MonthlyReader setEndDate(final LocalDate endDate) {
         this.endDate = endDate;
+        return this;
+    }
+
+
+    /**
+     * true to include usage from the master account and all subaccounts. false to only retrieve usage from the specified account. IncludeSubaccounts is true by default.
+     * @param includeSubaccounts true to include subaccounts
+     * @return this
+     */
+    public MonthlyReader setIncludeSubaccounts(final boolean includeSubaccounts) {
+        this.includeSubaccounts = includeSubaccounts;
         return this;
     }
 
@@ -183,5 +195,7 @@ public class MonthlyReader extends Reader<Monthly> {
         if (getPageSize() != null) {
             request.addQueryParam("PageSize", Integer.toString(getPageSize()));
         }
+       
+        request.addQueryParam("IncludeSubaccounts", this.includeSubaccounts);
     }
 }
